@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitație Denisa & Andrei</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #faf3e0;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNkNGFmMzciIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  #instruction {
+    position: absolute;
+    top: -60px;
+    width: 100%;
+    text-align: center;
+    color: #001f3f;
+    font-style: italic;
+    font-size: 17px;
+    animation: bounce 2.5s infinite;
+  }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+  #main-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    height: 580px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .envelope-wrapper {
+    position: absolute;
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 1s ease;
+  }
+  .envelope {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-color: #001f3f; border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  }
+  .flap {
+    position: absolute; top: 0; width: 0; height: 0;
+    border-left: 160px solid transparent; border-right: 160px solid transparent;
+    border-top: 115px solid #d4af37; transform-origin: top;
+    transition: transform 0.6s ease; z-index: 102;
+  }
+  .seal {
+    position: absolute; top: 85px; left: 135px; width: 50px; height: 50px;
+    background: radial-gradient(circle, #d4af37, #b8860b); border-radius: 50%;
+    z-index: 103; display: flex; justify-content: center; align-items: center;
+    color: white; font-family: 'Great Vibes', cursive; font-size: 18px;
+    border: 2px solid #996515; transition: opacity 0.3s;
+  }
+
+  .card-page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #fffdfa;
+    border: 1px solid #d4af37;
+    border-radius: 12px;
+    padding: 40px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 50;
+    animation: fadeIn 0.8s ease forwards;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .active-page { display: flex; }
+
+  .next-btn {
+    margin-top: 25px;
+    padding: 12px 20px;
+    background-color: #001f3f;
+    color: #d4af37;
+    border: 1px solid #d4af37;
+    border-radius: 25px;
+    font-family: 'Playfair Display', serif;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .opened .flap { transform: rotateX(180deg); z-index: 1; }
+  .opened .seal { opacity: 0; }
+  .opened #instruction { display: none; }
+  .out .envelope-wrapper { opacity: 0; visibility: hidden; transform: translateY(-150px) scale(0.5); }
+
+  .motto { font-style: italic; color: #b8860b; font-size: 15px; margin-bottom: 20px; }
+  h1 { font-family: 'Great Vibes', cursive; color: #001f3f; font-size: 40px; margin: 10px 0; }
+  h2 { font-size: 18px; color: #d4af37; margin: 20px 0 10px 0; border-bottom: 1px solid #eee; display: inline-block; padding-bottom: 5px; }
+  p { color: #333; font-size: 14px; line-height: 1.6; margin: 8px 0; }
+  .names { font-weight: bold; color: #001f3f; font-size: 15px; margin: 5px 0; }
+  .highlight { color: #001f3f; font-weight: bold; font-size: 16px; }
+  .small-title { font-size: 11px; text-transform: uppercase; color: #b8860b; letter-spacing: 2px; margin-top: 15px; }
+</style>
+</head>
+<body>
+
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.chosic.com/wp-content/uploads/2021/04/Warm-Memories-Emotional-Inspiring-Piano.mp3" type="audio/mpeg">
+  </audio>
+
+<div id="main-wrapper">
+  
+  <div id="instruction">Apasă pe plic pentru a deschide</div>
+
+  <div class="envelope-wrapper" id="envWrap" onclick="openEnvelope()">
+    <div class="flap"></div>
+    <div class="envelope"></div>
+    <div class="seal">D&A</div>
+  </div>
+
+  <div class="card-page" id="page1">
+    <div class="motto">"Două inimi, un singur drum:<br>Iubirea fără sfârșit."</div>
+    <p>Din iubirea noastră necondiționată,<br>am ales să pornim la drum ca una.</p>
+    <p>Noi,</p>
+    <h1>Denisa & Andrei</h1>
+    <button class="next-btn" onclick="nextPage(2)">Povestea noastră</button>
+  </div>
+
+  <div class="card-page" id="page2">
+    <div class="small-title">Binecuvântați de părinți:</div>
+    <div class="names">Anișoara & Daniel</div>
+    <div class="names">Cătălina & Costel</div>
+    <div class="small-title">Călăuziți de nași:</div>
+    <div class="names">Bianca & Gabriel</div>
+    <p style="margin-top: 25px;">Vă așteptăm sâmbătă,<br><span class="highlight">22 august 2026</span></p>
+    <button class="next-btn" onclick="nextPage(3)">Program și Locație</button>
+  </div>
+
+  <div class="card-page" id="page3">
+    <h2>Cununia Religioasă</h2>
+    <p>Biserica „Sf. Dumitru” Narcisa<br>Ora: <span class="highlight">15:00</span></p>
+    <h2>Petrecerea</h2>
+    <p><span class="highlight">Royal Garden, Salonul Imperial</span><br>Ora: <span class="highlight">19:00</span></p>
+    <div style="margin-top:20px; border-top: 1px double #d4af37; padding-top:15px;">
+      <p style="font-size:12px;">Confirmări până la 01.08.2026:</p>
+      <p><strong>0757 080 845</strong> (Denisa) / <strong>0770 511 875</strong> (Andrei)</p>
+    </div>
+    <button class="next-btn" onclick="nextPage(1)">Înapoi la început</button>
+  </div>
+
+</div>
+
+<script>
+  function openEnvelope() {
+    const music = document.getElementById('bgMusic');
+    const wrapper = document.getElementById('envWrap');
+    
+    // Deschidere plic
+    wrapper.classList.add('opened');
+    
+    // Pornire muzică
+    music.volume = 0.5;
+    music.play().then(() => {
+        console.log("Muzica a pornit!");
+    }).catch(error => {
+        console.log("Eroare la redare: ", error);
+    });
+
+    setTimeout(() => {
+      document.getElementById('main-wrapper').classList.add('out');
+      document.getElementById('page1').classList.add('active-page');
+    }, 1200);
+  }
+
+  function nextPage(num) {
+    const pages = document.querySelectorAll('.card-page');
+    pages.forEach(p => p.classList.remove('active-page'));
+    document.getElementById('page' + num).classList.add('active-page');
+  }
+</script>
+
+</body>
+</html>
