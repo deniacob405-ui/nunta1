@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Invitație Denisa & Andrei</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
@@ -15,45 +15,44 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     width: 100vw;
     overflow: hidden;
-    position: relative;
+    position: fixed; /* Fixează ecranul să nu tremure pe mobil */
   }
 
-  /* TEXTUL DEASUPRA PLICULUI */
+  /* TEXTUL INSTRUCTIUNE */
   #instruction {
     position: absolute;
-    top: 20%;
+    top: 15%;
     width: 100%;
     text-align: center;
     color: #001f3f;
     font-style: italic;
-    font-size: 18px;
-    z-index: 10; /* Pus sub nivelul plicului ca să nu blocheze click-ul */
+    font-size: 20px;
+    z-index: 5;
     animation: bounce 2s infinite;
-    pointer-events: none; /* Foarte important: ignoră atingerile */
   }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
   #main-wrapper {
     position: relative;
     width: 100%;
-    max-width: 360px;
-    height: 600px;
+    max-width: 350px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  /* --- PLICUL --- */
+  /* PLICUL */
   .envelope-wrapper {
     position: absolute;
     width: 320px;
     height: 220px;
     cursor: pointer;
-    z-index: 200; /* Cel mai de sus nivel */
-    transition: all 1s ease;
+    z-index: 500; /* Foarte sus ca să poată fi apăsat */
+    transition: all 0.8s ease;
   }
   .envelope {
     position: absolute;
@@ -65,77 +64,72 @@
     position: absolute; top: 0; width: 0; height: 0;
     border-left: 160px solid transparent; border-right: 160px solid transparent;
     border-top: 115px solid #d4af37; transform-origin: top;
-    transition: transform 0.6s ease; z-index: 202;
+    transition: transform 0.5s ease; z-index: 501;
   }
   .seal {
     position: absolute; top: 90px; left: 135px; width: 50px; height: 50px;
     background: radial-gradient(circle, #d4af37, #b8860b); border-radius: 50%;
-    z-index: 203; display: flex; justify-content: center; align-items: center;
+    z-index: 502; display: flex; justify-content: center; align-items: center;
     color: white; font-family: 'Great Vibes', cursive; font-size: 18px;
-    border: 2px solid #996515; transition: opacity 0.3s;
+    border: 2px solid #996515;
   }
 
-  /* --- PAGINILE --- */
+  /* PAGINILE */
   .card-page {
     position: absolute;
-    width: 100%;
+    width: 95%;
     height: 520px;
     background-color: #fffdfa;
     border: 1px solid #d4af37;
-    border-radius: 10px;
-    padding: 35px 20px;
+    border-radius: 12px;
+    padding: 30px 15px;
     box-sizing: border-box;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     display: none;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 50;
-    animation: fadeIn 1s ease forwards;
+    z-index: 10;
+    animation: fadeIn 0.8s ease forwards;
   }
-
-  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .active-page { display: flex; }
 
-  /* BUTON NAVIGARE */
+  /* BUTON */
   .next-btn {
-    padding: 12px 20px;
+    padding: 12px 0;
     background-color: #001f3f;
     color: #d4af37;
-    border: 1px solid #d4af37;
+    border: none;
     border-radius: 25px;
     font-family: 'Playfair Display', serif;
-    cursor: pointer;
-    font-size: 13px;
-    margin-top: 10px;
+    width: 80%;
+    margin: 0 auto;
+    font-weight: bold;
   }
 
-  /* STARILE DE DESCHIDERE */
-  body.opened .flap { transform: rotateX(180deg); }
-  body.opened .seal { opacity: 0; }
-  body.opened #instruction { display: none; }
-  body.out .envelope-wrapper { opacity: 0; visibility: hidden; transform: translateY(-150px); }
+  /* EFECTE DESCHIDERE */
+  .opened-envelope .flap { transform: rotateX(180deg); }
+  .opened-envelope .seal { opacity: 0; }
+  .move-out { opacity: 0; transform: translateY(-100px); pointer-events: none; }
 
   /* TEXT */
-  .motto { font-style: italic; color: #b8860b; font-size: 14px; margin-bottom: 15px; }
   h1 { font-family: 'Great Vibes', cursive; color: #001f3f; font-size: 36px; margin: 10px 0; }
-  h2 { font-size: 18px; color: #d4af37; margin: 15px 0 5px 0; border-bottom: 1px solid #eee; display: inline-block; padding-bottom: 5px; }
-  p { color: #333; font-size: 14px; line-height: 1.5; }
-  .names { font-weight: bold; color: #001f3f; font-size: 15px; margin: 5px 0; }
-  .highlight { color: #001f3f; font-weight: bold; }
+  .names { font-weight: bold; color: #001f3f; font-size: 16px; margin: 5px 0; }
+  .highlight { color: #d4af37; font-weight: bold; }
 </style>
 </head>
-<body onclick="playMusic()">
+<body>
 
   <div id="instruction">Apasă pe plic pentru a deschide</div>
 
-  <audio id="bgMusic" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
   </audio>
 
 <div id="main-wrapper">
   
-  <div class="envelope-wrapper" id="envWrap" onclick="openEnvelope(event)">
+  <div class="envelope-wrapper" id="envWrap" onclick="handleOpen()">
     <div class="flap"></div>
     <div class="envelope"></div>
     <div class="seal">D&A</div>
@@ -143,25 +137,23 @@
 
   <div class="card-page" id="page1">
     <div>
-      <div class="motto">"Două inimi, un singur drum: Iubirea fără sfârșit."</div>
+      <p style="font-style: italic; color: #b8860b; margin-bottom: 20px;">"Două inimi, un singur drum: Iubirea fără sfârșit."</p>
       <p>Din iubirea noastră necondiționată,<br>am ales să pornim la drum ca una.</p>
-      <p style="margin-top:15px">Noi,</p>
+      <p style="margin-top:20px">Noi,</p>
       <h1>Denisa & Andrei</h1>
     </div>
-    <button class="next-btn" onclick="nextPage(2)">Vezi detaliile evenimentului</button>
+    <button class="next-btn" onclick="nextPage(2)">Vezi detaliile</button>
   </div>
 
   <div class="card-page" id="page2">
     <div>
-      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b;">Binecuvântați de părinții noștri:</p>
-      <div class="names">Anișoara & Daniel<br>Cătălina & Costel</div>
-      
-      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b; margin-top: 15px;">Călăuziți de nași:</p>
-      <div class="names">Bianca & Gabriel</div>
-
-      <p style="margin-top: 20px;">Vă așteptăm cu drag<br><span class="highlight">Sâmbătă, 22 August 2026</span></p>
-      <h2>Cununia Religioasă</h2>
-      <p>Biserica „Sf. Dumitru” Narcisa, ora 15:00</p>
+      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b;">Părinți:</p>
+      <p class="names">Anișoara & Daniel<br>Cătălina & Costel</p>
+      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b; margin-top: 15px;">Nași:</p>
+      <p class="names">Bianca & Gabriel</p>
+      <p style="margin-top: 20px;">Sâmbătă, <span class="highlight">22 August 2026</span></p>
+      <h2 style="color:#001f3f; margin-top:10px;">Cununia Religioasă</h2>
+      <p>Biserica „Sf. Dumitru” Narcisa, 15:00</p>
     </div>
     <button class="next-btn" onclick="nextPage(3)">Unde petrecem?</button>
   </div>
@@ -169,12 +161,11 @@
   <div class="card-page" id="page3">
     <div>
       <h1>Petrecerea</h1>
-      <p>Celebrăm iubirea la<br><span class="highlight" style="font-size:17px;">Royal Garden, Salonul Imperial</span><br>începând cu ora 19:00.</p>
-      
-      <div style="margin-top:20px; border-top: 1px double #d4af37; padding-top:15px;">
-        <p style="font-size:12px;">Vă rugăm să confirmați până la 01.08.2026:</p>
-        <p><strong>0757 080 845</strong> Denisa</p>
-        <p><strong>0770 511 875</strong> Andrei</p>
+      <p>Celebrăm la<br><strong style="color:#001f3f;">Royal Garden, Salonul Imperial</strong><br>începând cu ora 19:00.</p>
+      <div style="margin-top:30px; border-top: 1px solid #d4af37; padding-top:20px;">
+        <p style="font-size:13px;">Confirmări până la 01.08.2026:</p>
+        <p class="names">0757 080 845 (Denisa)</p>
+        <p class="names">0770 511 875 (Andrei)</p>
       </div>
     </div>
     <button class="next-btn" onclick="nextPage(1)">Vezi din nou</button>
@@ -183,25 +174,25 @@
 </div>
 
 <script>
-  let musicStarted = false;
+  function handleOpen() {
+    // 1. Pornim muzica imediat
+    const music = document.getElementById('bgMusic');
+    music.play().catch(function(error) {
+       console.log("Muzica a fost blocata initial, dar incercam din nou.");
+    });
 
-  function playMusic() {
-    if (!musicStarted) {
-      const music = document.getElementById('bgMusic');
-      music.play().catch(e => console.log("Audio block bypass"));
-      musicStarted = true;
-    }
-  }
+    // 2. Ascundem instructiunea instant
+    document.getElementById('instruction').style.display = 'none';
 
-  function openEnvelope(event) {
-    event.stopPropagation(); // Previne declanșarea dublă
-    document.body.classList.add('opened');
-    playMusic();
+    // 3. Animăm plicul
+    const wrap = document.getElementById('envWrap');
+    wrap.classList.add('opened-envelope');
 
+    // 4. Tranziția către card
     setTimeout(() => {
-      document.body.classList.add('out');
+      wrap.classList.add('move-out');
       document.getElementById('page1').classList.add('active-page');
-    }, 1200);
+    }, 1000);
   }
 
   function nextPage(num) {
