@@ -10,7 +10,6 @@
 
   body {
     background-color: #faf3e0;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNkNGFmMzciIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
     font-family: 'Playfair Display', serif;
     display: flex;
     justify-content: center;
@@ -18,113 +17,120 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-    position: fixed; /* Fixează ecranul să nu tremure pe mobil */
+    position: fixed;
   }
 
-  /* TEXTUL INSTRUCTIUNE */
+  /* TEXT INSTRUCTIUNE */
   #instruction {
     position: absolute;
-    top: 15%;
+    top: 18%;
     width: 100%;
     text-align: center;
     color: #001f3f;
     font-style: italic;
-    font-size: 20px;
-    z-index: 5;
+    font-size: 18px;
+    z-index: 1000;
     animation: bounce 2s infinite;
+    pointer-events: none;
   }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
   #main-wrapper {
     position: relative;
     width: 100%;
-    max-width: 350px;
-    height: 500px;
+    max-width: 340px;
+    height: 550px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  /* PLICUL */
+  /* PLIC */
   .envelope-wrapper {
     position: absolute;
-    width: 320px;
-    height: 220px;
+    width: 300px;
+    height: 200px;
     cursor: pointer;
-    z-index: 500; /* Foarte sus ca să poată fi apăsat */
+    z-index: 500;
     transition: all 0.8s ease;
   }
   .envelope {
     position: absolute;
     width: 100%; height: 100%;
     background-color: #001f3f; border-radius: 8px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
   .flap {
     position: absolute; top: 0; width: 0; height: 0;
-    border-left: 160px solid transparent; border-right: 160px solid transparent;
-    border-top: 115px solid #d4af37; transform-origin: top;
+    border-left: 150px solid transparent; border-right: 150px solid transparent;
+    border-top: 105px solid #d4af37; transform-origin: top;
     transition: transform 0.5s ease; z-index: 501;
   }
   .seal {
-    position: absolute; top: 90px; left: 135px; width: 50px; height: 50px;
+    position: absolute; top: 80px; left: 125px; width: 50px; height: 50px;
     background: radial-gradient(circle, #d4af37, #b8860b); border-radius: 50%;
     z-index: 502; display: flex; justify-content: center; align-items: center;
     color: white; font-family: 'Great Vibes', cursive; font-size: 18px;
     border: 2px solid #996515;
   }
 
-  /* PAGINILE */
+  /* PAGINI CARD */
   .card-page {
     position: absolute;
-    width: 95%;
-    height: 520px;
+    width: 100%;
+    height: 500px;
     background-color: #fffdfa;
     border: 1px solid #d4af37;
     border-radius: 12px;
-    padding: 30px 15px;
+    padding: 40px 20px;
     box-sizing: border-box;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
     display: none;
     flex-direction: column;
     justify-content: space-between;
     z-index: 10;
     animation: fadeIn 0.8s ease forwards;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   .active-page { display: flex; }
 
   /* BUTON */
   .next-btn {
-    padding: 12px 0;
+    padding: 14px 0;
     background-color: #001f3f;
     color: #d4af37;
     border: none;
-    border-radius: 25px;
+    border-radius: 30px;
     font-family: 'Playfair Display', serif;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
-    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    cursor: pointer;
   }
 
-  /* EFECTE DESCHIDERE */
+  /* ANIMATII */
   .opened-envelope .flap { transform: rotateX(180deg); }
   .opened-envelope .seal { opacity: 0; }
-  .move-out { opacity: 0; transform: translateY(-100px); pointer-events: none; }
+  .move-out { opacity: 0; transform: scale(0.8); pointer-events: none; }
 
-  /* TEXT */
-  h1 { font-family: 'Great Vibes', cursive; color: #001f3f; font-size: 36px; margin: 10px 0; }
-  .names { font-weight: bold; color: #001f3f; font-size: 16px; margin: 5px 0; }
+  /* TEXT STYLE */
+  .motto { font-style: italic; color: #b8860b; font-size: 14px; line-height: 1.4; margin-bottom: 20px; }
+  h1 { font-family: 'Great Vibes', cursive; color: #001f3f; font-size: 40px; margin: 15px 0; }
+  .label { font-size: 11px; text-transform: uppercase; color: #b8860b; letter-spacing: 2px; margin-bottom: 5px; }
+  .names { font-weight: bold; color: #001f3f; font-size: 16px; margin-bottom: 15px; line-height: 1.4; }
+  .details-title { font-size: 20px; color: #001f3f; margin: 10px 0; font-weight: bold; }
   .highlight { color: #d4af37; font-weight: bold; }
+  a { color: #001f3f; text-decoration: none; font-weight: bold; }
 </style>
 </head>
 <body>
 
   <div id="instruction">Apasă pe plic pentru a deschide</div>
 
-  <audio id="bgMusic" loop preload="auto">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+  <audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
   </audio>
 
 <div id="main-wrapper">
@@ -137,9 +143,9 @@
 
   <div class="card-page" id="page1">
     <div>
-      <p style="font-style: italic; color: #b8860b; margin-bottom: 20px;">"Două inimi, un singur drum: Iubirea fără sfârșit."</p>
-      <p>Din iubirea noastră necondiționată,<br>am ales să pornim la drum ca una.</p>
-      <p style="margin-top:20px">Noi,</p>
+      <p class="motto">"Două inimi, un singur drum:<br>Iubirea fără sfârșit."</p>
+      <p style="font-size: 14px;">Din iubirea noastră necondiționată,<br>am ales să pornim la drum ca una.</p>
+      <p style="margin-top:25px; font-size: 14px;">Noi,</p>
       <h1>Denisa & Andrei</h1>
     </div>
     <button class="next-btn" onclick="nextPage(2)">Vezi detaliile</button>
@@ -147,25 +153,28 @@
 
   <div class="card-page" id="page2">
     <div>
-      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b;">Părinți:</p>
+      <p class="label">Părinți:</p>
       <p class="names">Anișoara & Daniel<br>Cătălina & Costel</p>
-      <p style="font-size: 11px; text-transform: uppercase; color: #b8860b; margin-top: 15px;">Nași:</p>
+      
+      <p class="label" style="margin-top: 15px;">Nași:</p>
       <p class="names">Bianca & Gabriel</p>
-      <p style="margin-top: 20px;">Sâmbătă, <span class="highlight">22 August 2026</span></p>
-      <h2 style="color:#001f3f; margin-top:10px;">Cununia Religioasă</h2>
-      <p>Biserica „Sf. Dumitru” Narcisa, 15:00</p>
+
+      <p style="margin-top: 25px; font-size: 15px;">Sâmbătă, <span class="highlight">22 August 2026</span></p>
+      <div class="details-title">Cununia Religioasă</div>
+      <p style="font-size: 14px;">Biserica „Sf. Dumitru” Narcisa<br>Ora 15:00</p>
     </div>
     <button class="next-btn" onclick="nextPage(3)">Unde petrecem?</button>
   </div>
 
   <div class="card-page" id="page3">
     <div>
-      <h1>Petrecerea</h1>
-      <p>Celebrăm la<br><strong style="color:#001f3f;">Royal Garden, Salonul Imperial</strong><br>începând cu ora 19:00.</p>
-      <div style="margin-top:30px; border-top: 1px solid #d4af37; padding-top:20px;">
-        <p style="font-size:13px;">Confirmări până la 01.08.2026:</p>
-        <p class="names">0757 080 845 (Denisa)</p>
-        <p class="names">0770 511 875 (Andrei)</p>
+      <h1 style="font-size: 45px;">Petrecerea</h1>
+      <p style="font-size: 15px;">Celebrăm iubirea la<br><strong style="color:#001f3f; font-size: 17px;">Royal Garden, Salonul Imperial</strong><br>începând cu ora 19:00.</p>
+      
+      <div style="margin-top:40px; border-top: 1px solid #d4af37; padding-top:20px;">
+        <p style="font-size:12px; margin-bottom: 10px;">Vă rugăm să confirmați până la 01.08.2026:</p>
+        <p class="names"><a href="tel:0757080845">0757 080 845</a> (Denisa)</p>
+        <p class="names"><a href="tel:0770511875">0770 511 875</a> (Andrei)</p>
       </div>
     </div>
     <button class="next-btn" onclick="nextPage(1)">Vezi din nou</button>
@@ -175,20 +184,16 @@
 
 <script>
   function handleOpen() {
-    // 1. Pornim muzica imediat
     const music = document.getElementById('bgMusic');
-    music.play().catch(function(error) {
-       console.log("Muzica a fost blocata initial, dar incercam din nou.");
-    });
+    music.play().catch(e => console.log("Audio block"));
 
-    // 2. Ascundem instructiunea instant
-    document.getElementById('instruction').style.display = 'none';
+    // DISPARE INSTRUCTIUNEA IMEDIAT
+    document.getElementById('instruction').style.opacity = '0';
+    setTimeout(() => { document.getElementById('instruction').style.display = 'none'; }, 500);
 
-    // 3. Animăm plicul
     const wrap = document.getElementById('envWrap');
     wrap.classList.add('opened-envelope');
 
-    // 4. Tranziția către card
     setTimeout(() => {
       wrap.classList.add('move-out');
       document.getElementById('page1').classList.add('active-page');
